@@ -24,4 +24,8 @@ ipcMain.on('create-user',async(e,data)=>{
     e.reply('create-success',JSON.stringify(userData))
 })
 
+ipcMain.on('get-users', async(e)=>{
+    const users = await User.find();
+    e.reply('get-user-success',JSON.stringify(users))
+})
 exports.createWindow = createWindow();

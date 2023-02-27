@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     list-style: none;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 body{
     font-family: 'Roboto', sans-serif;
@@ -14,7 +14,8 @@ body{
 }
 .dashboard-container{
     background-color: #C0EEF2;
-    height: 100vh;
+    height: 170vh;
+    max-width: 170vh;
     padding-top: 25%;
     min-width: 230px;
     max-width: 100vh;
@@ -73,6 +74,7 @@ body{
     display: inherit;
     flex-direction: row;
     margin: 0 auto;
+    margin-bottom: 11rem;
 }
 .main-container form div{
     display: flex;
@@ -97,5 +99,8 @@ body{
     border-radius: 8px;
     height: 25px;
 
+}
+.main-container div {
+    padding-right: 20px;
 }
 
