@@ -9,15 +9,15 @@ body{
 }
 .principal-container{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: auto 1fr ;
+    min-width: 360px;
 }
 .dashboard-container{
     background-color: #C0EEF2;
-    width: 20%;
     height: 100vh;
-    width: 30vh;
     padding-top: 25%;
-
+    min-width: 230px;
+    max-width: 100vh;
 }
 .dashboard-icon{
     width: 18px;
@@ -54,4 +54,48 @@ body{
  */
  .main-container{
     display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    background-color: #C0EEF2;
+    height: 30px;
+    width: 99%;
+    height: 36%;
+    min-height: 300px;
+    margin: 0 auto;
+    padding-left: 50px;
+
  }
+ .main-container h1{
+    text-align: center;
+    margin-bottom: 3rem;
+ }
+.main-container form{
+    display: inherit;
+    flex-direction: row;
+    margin: 0 auto;
+}
+.main-container form div{
+    display: flex;
+    flex-direction: column;
+    font-weight: 500; 
+    padding-right: 15px;
+    
+}
+.main-container form button{
+    width: 90px;
+    height: 38px;
+    margin-top: 25px;
+    border: none;
+    background-color: #181823;
+    border: solid 2px #C0EEF2;
+    color: #C0EEF2;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.main-container form div input{
+    border: none;
+    border-radius: 8px;
+    height: 25px;
+
+}
+
