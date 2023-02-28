@@ -6,9 +6,20 @@ const emailUser = document.querySelector('#email-user');
 const phoneUser = document.querySelector('#phone-user');
 const formUser = document.querySelector('#form-users');
 const userList = document.querySelector('#users-list')
-const buttomModalEdit = document.querySelector('#button-edit-modal')
 let arrayUsers = [];
 
+
+
+let openModalEdit = (id,name,lastname,email,phone)=>{
+    let Object = {
+        id,
+        name,
+        lastname,
+        email,
+        phone
+    }
+        ipcRenderer.send('open-new-window',Object);
+}
 let deleteUser =(id,name)=>{
     Swal.fire({
         title: '¿Estas seguro que quieres eliminar a ' +name + '?',
@@ -29,7 +40,7 @@ let deleteUser =(id,name)=>{
         }
       })
 } 
-let getUsers =  (users)=>{
+let getUsers =  (id)=>{
     userList.innerHTML = '';
     arrayUsers.map(user => {
         userList.innerHTML += `
@@ -40,7 +51,7 @@ let getUsers =  (users)=>{
             <td>${user.phone}</td>
             <td>
             <button class="button-delete" onclick="deleteUser('${user._id}', '${user.name}')"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178384.png" alt="delete-buttom" class="delete-buttom" ></button>
-            <button id="button-edit-modal">Edit</button>
+            <button class="button-edit" onclick="openModalEdit('${user._id}', '${user.name}','${user.lastname}','${user.email}','${user.phone}' )"><img src="https://cdn-icons-png.flaticon.com/512/1160/1160515.png" alt="delete-buttom" class="edit-buttom" ></button>
             </td>
 
         </tr>
@@ -83,4 +94,28 @@ ipcRenderer.on('delete-user-success',(e,data)=>{
     getUsers(arrayUsers);
 })
 
+ipcRenderer.on('user-update-success',(e,data)=>{
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha actualizado el usuario correctamente!!',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    const userUpdated = JSON.parse(data);
+    console.log(userUpdated);
+    arrayUsers = arrayUsers.map(user => {
+        if(user._id === userUpdated._id){
+            user.name = userUpdated.name;
+            user.lastname = userUpdated.lastname;
+            user.email = userUpdated.email;
+            user.phone = userUpdated.phone;
+            console.log(user._id, userUpdated._id);
+        }
+        return user 
+      })
+    getUsers(arrayUsers);
+})
 
+
+//? Create other window for edit
