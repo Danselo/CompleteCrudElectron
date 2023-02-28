@@ -1,14 +1,34 @@
 const { ipcRenderer, ipcMain } = require("electron");
-
+const Swal =  require('sweetalert2');
 const nameUser = document.querySelector('#name-user');
 const lastnameUser = document.querySelector('#lastname-user');
 const emailUser = document.querySelector('#email-user');
 const phoneUser = document.querySelector('#phone-user');
 const formUser = document.querySelector('#form-users');
 const userList = document.querySelector('#users-list')
+const buttomModalEdit = document.querySelector('#button-edit-modal')
 let arrayUsers = [];
 
-
+let deleteUser =(id,name)=>{
+    Swal.fire({
+        title: '¿Estas seguro que quieres eliminar a ' +name + '?',
+        text: "No puedes revertir esta acción",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ff405c',
+        cancelButtonColor: 'rgb(2, 101, 207)',
+        confirmButtonText: 'Si, Eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+         ipcRenderer.send('delete-user',id);
+          Swal.fire(
+            'Eliminado!',
+            'El usuario ha sido eliminado',
+            'success'
+          )
+        }
+      })
+} 
 let getUsers =  (users)=>{
     userList.innerHTML = '';
     arrayUsers.map(user => {
@@ -19,8 +39,8 @@ let getUsers =  (users)=>{
             <td>${user.email}</td>
             <td>${user.phone}</td>
             <td>
-            <button>Delete</button>
-            <button>Edit</button>
+            <button class="button-delete" onclick="deleteUser('${user._id}', '${user.name}')"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178384.png" alt="delete-buttom" class="delete-buttom" ></button>
+            <button id="button-edit-modal">Edit</button>
             </td>
 
         </tr>
@@ -54,6 +74,13 @@ ipcRenderer.on('get-user-success',(e,data)=>{
     console.log(arrayUsers);
     getUsers(arrayUsers)
 })
-
+ipcRenderer.on('delete-user-success',(e,data)=>{
+    const deleteUser = JSON.parse(data);
+    const newUser = arrayUsers.filter(user => {
+        return user._id !== deleteUser._id
+    } )
+    arrayUsers = newUser
+    getUsers(arrayUsers);
+})
 
 

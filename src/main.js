@@ -28,4 +28,9 @@ ipcMain.on('get-users', async(e)=>{
     const users = await User.find();
     e.reply('get-user-success',JSON.stringify(users))
 })
+
+ipcMain.on('delete-user',async(e,data) =>{
+    const deleteUser = await User.findByIdAndDelete(data);
+    e.reply('delete-user-success',JSON.stringify(deleteUser));
+})
 exports.createWindow = createWindow();
