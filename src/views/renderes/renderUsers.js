@@ -1,4 +1,4 @@
-const { ipcRenderer, ipcMain } = require("electron");
+const { ipcRenderer } = require("electron");
 const Swal =  require('sweetalert2');
 const nameUser = document.querySelector('#name-user');
 const lastnameUser = document.querySelector('#lastname-user');
@@ -59,6 +59,7 @@ let getUsers =  (id)=>{
         ` 
     })
 }
+//? Listener Form 
 formUser.addEventListener('submit',(e)=>{
     e.preventDefault();
     const user = {
@@ -69,10 +70,17 @@ formUser.addEventListener('submit',(e)=>{
     }
     ipcRenderer.send('create-user',user);
     formUser.reset();
-    lastnameUser.focus();
+    nameUser.focus();
 })
-
+//?
 ipcRenderer.on('create-success',(e,data)=>{
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha creado el usuario correctamente!!',
+        showConfirmButton: false,
+        timer: 2000
+      })
     const user = JSON.parse(data);
     const usersUpdated = arrayUsers.push(user)
     getUsers(usersUpdated)
@@ -82,7 +90,6 @@ ipcRenderer.send('get-users');
 
 ipcRenderer.on('get-user-success',(e,data)=>{
     arrayUsers = JSON.parse(data);
-    console.log(arrayUsers);
     getUsers(arrayUsers)
 })
 ipcRenderer.on('delete-user-success',(e,data)=>{
@@ -110,7 +117,6 @@ ipcRenderer.on('user-update-success',(e,data)=>{
             user.lastname = userUpdated.lastname;
             user.email = userUpdated.email;
             user.phone = userUpdated.phone;
-            console.log(user._id, userUpdated._id);
         }
         return user 
       })

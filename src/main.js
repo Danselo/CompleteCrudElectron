@@ -1,4 +1,4 @@
-const {app,BrowserWindow, contextBridge,ipcMain} = require('electron');
+const {app,BrowserWindow,ipcMain} = require('electron');
 const User = require('./model/User');
 const Product = require('./model/Product')
 
@@ -16,7 +16,6 @@ function createWindow(){
         })
         mainWindow.loadFile('src/views/index.html')
     })
-
 
 }
 
@@ -78,7 +77,6 @@ ipcMain.on('open-new-window',(e,data)=>{
 //? take the petition for edit
 ipcMain.on('user-update',async(e,data)=>{
     newWindow.close();
-    console.log(data);
     const userUpdate = await User.findByIdAndUpdate(data.id,{
         name: data.userObject.name,
         lastname: data.userObject.lastname,
