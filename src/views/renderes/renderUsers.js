@@ -90,13 +90,7 @@ formUser.addEventListener('submit',(e)=>{
 })
 //?
 ipcRenderer.on('create-success',(e,data)=>{
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Se ha creado el usuario correctamente!!',
-        showConfirmButton: false,
-        timer: 2000
-      })
+    C
     const user = JSON.parse(data);
     const usersUpdated = arrayUsers.push(user)
     getUsers(usersUpdated)

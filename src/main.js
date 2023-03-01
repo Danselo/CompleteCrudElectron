@@ -106,4 +106,10 @@ const product = await Product.find();
 console.log(product);
 e.reply('get-product-success', JSON.stringify(product))
 })
+
+
+ipcMain.on('delete-product', async(e, data)=>{
+const product = await Product.findByIdAndDelete(data);
+e.reply('delete-product-success', JSON.stringify(product));
+})
 exports.createWindow = createWindow();
