@@ -154,3 +154,13 @@ body{
     font-size: 12px;
     margin-top: 5px;
 }
+
+
+
+/* Imagen */
+
+.image-pro{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}

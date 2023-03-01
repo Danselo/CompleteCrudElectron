@@ -100,4 +100,10 @@ ipcMain.on('create-product', async(e, data)=>{
     e.reply('create-product-success',JSON.stringify(productDate));
 
 })
+
+ipcMain.on('get-products', async(e)=>{
+const product = await Product.find();
+console.log(product);
+e.reply('get-product-success', JSON.stringify(product))
+})
 exports.createWindow = createWindow();
