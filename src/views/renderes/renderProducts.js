@@ -10,6 +10,20 @@ const ListProduct = document.querySelector('#product_list');
 let arrayProduct = [];
 
 
+function updateProduct(id, name, price, description, photo){
+let product= {
+    id: id,
+    name: name,
+    price: price,
+    description: description,
+    photo: photo
+
+
+}
+ipcRenderer.send('update-product', product);
+
+}
+
 function deleteProduct(id, name) {
     Swal.fire({
         title: '¿Estas seguro que quieres eliminar el producto:  ' + name + '?',
@@ -43,7 +57,7 @@ function loadProduct(data) {
         <td><img src='${product.photo}' class="image-pro"></td>
         <td>
         <button class="button-delete" onclick="deleteProduct('${product._id}', '${product.name}')"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178384.png" alt="delete-buttom" class="delete-buttom" ></button>
-        <button class="button-edit"><img src="https://cdn-icons-png.flaticon.com/512/1160/1160515.png" alt="delete-buttom" class="edit-buttom" ></button>
+        <button class="button-edit" onclick="updateProduct('${product._id}', '${product.name}','${product.price}','${product.description}', '${product.photo}')"><img src="https://cdn-icons-png.flaticon.com/512/1160/1160515.png" alt="delete-buttom" class="edit-buttom" ></button>
         </td>
 
        
@@ -109,6 +123,33 @@ ipcRenderer.on('delete-product-success', (e, data) => {
     arrayProduct = deleteProduct;
     loadProduct(arrayProduct);
 })
+
+
+ipcRenderer.on('product-update-success', (e, data)=>{
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha editado el producto correctamente!!',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    const producto =JSON.parse(data);
+    arrayProduct = arrayProduct.map(product=>{
+        if(product._id === producto._id) {
+            product.name = producto.name;
+            product.price = producto.price;
+            product.description = producto.description;
+            product.photo = producto.photo;
+
+            
+
+        }
+        return product;
+    })
+
+    loadProduct(arrayProduct);
+})
+
 
 
 

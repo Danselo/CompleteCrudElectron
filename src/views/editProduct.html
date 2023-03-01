@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="./css/edit.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="main-container">
+        <h1>Editar Producto</h1>
+        <form id="form_product">
+            <div>
+            <label>Name</label>
+            <input type="text"  id="name_product" required autofocus>
+            <label>Price</label>
+            <input type="text" id="price_product" required>
+            </div>
+            <div>
+                <label>Photo</label>
+                <input type="text" id="photo_product" required>
+                <label>Description</label>
+                <textarea name="" id="description_product" cols="30" rows="1"></textarea>
+                <span class="error-message"></span>
+            </div>
+            <button type="submit">Editar</button>
+          
+        </form>
+        </div>
+    <script src="./renderes/modalProduct.js"></script>
+</body>
+</html>

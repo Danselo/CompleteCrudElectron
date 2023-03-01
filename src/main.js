@@ -5,6 +5,7 @@ const Product = require('./model/Product')
 
 let mainWindow
 let newWindow
+let newWindowP;
 function createWindow(){
     app.on('ready', ()=> {
         mainWindow = new BrowserWindow({
@@ -16,9 +17,46 @@ function createWindow(){
             }
         })
         mainWindow.loadFile('src/views/index.html')
+
+        
     })
 
 }
+
+//Crear ventana de edicion de product
+function createNewWindowP(ObjectUpdate){
+        //? Verificar si la pestaña esta abierta
+
+        if(newWindowP != null){
+            newWindowP.close();
+            return;
+        }
+        //?
+    newWindowP = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+    newWindowP.loadFile('src/views/editProduct.html');
+
+          // Emite cuando la ventana está cerrada.
+          newWindowP.on('closed', () => {
+            newWindowP = null;
+        });
+    
+        // ? Send Object to new Window
+        newWindowP.webContents.on('did-finish-load',()=>{
+            newWindowP.webContents.send('object-update-product',ObjectUpdate)
+        })
+}
+
+
+
+
+
 
 //? create new window
 function createNewWindow(objectToPrint){
@@ -103,7 +141,6 @@ ipcMain.on('create-product', async(e, data)=>{
 
 ipcMain.on('get-products', async(e)=>{
 const product = await Product.find();
-console.log(product);
 e.reply('get-product-success', JSON.stringify(product))
 })
 
@@ -113,3 +150,26 @@ const product = await Product.findByIdAndDelete(data);
 e.reply('delete-product-success', JSON.stringify(product));
 })
 exports.createWindow = createWindow();
+
+
+
+//update product
+ipcMain.on('update-product',(e,data)=>{
+    createNewWindowP(data);
+})
+
+
+ipcMain.on('update-new-product', async(e, data)=>{
+newWindowP.close();
+    const product = await Product.findByIdAndUpdate(data.id, {
+        name: data.product.name,
+        price: data.product.price,
+        photo: data.product.photo,
+    description: data.product.description
+
+    },{new: true});
+
+    mainWindow.webContents.send('product-update-success',JSON.stringify(product));
+
+    
+})
