@@ -2,6 +2,7 @@ const {app,BrowserWindow,ipcMain} = require('electron');
 const User = require('./model/User');
 const Product = require('./model/Product')
 
+
 let mainWindow
 let newWindow
 function createWindow(){
@@ -90,4 +91,13 @@ ipcMain.on('user-update',async(e,data)=>{
     
 })
 
+
+//******** Productoss *********
+ipcMain.on('create-product', async(e, data)=>{
+    const product = new Product(data);
+    const productDate = await product.save();
+ //Envio la confirmacion desde el back
+    e.reply('create-product-success',JSON.stringify(productDate));
+
+})
 exports.createWindow = createWindow();
