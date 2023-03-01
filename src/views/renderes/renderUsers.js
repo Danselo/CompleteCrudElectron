@@ -6,6 +6,11 @@ const emailUser = document.querySelector('#email-user');
 const phoneUser = document.querySelector('#phone-user');
 const formUser = document.querySelector('#form-users');
 const userList = document.querySelector('#users-list')
+
+//? this is for validation 
+const errorMessage = document.querySelector('.error-message');
+//?
+
 let arrayUsers = [];
 
 
@@ -62,15 +67,26 @@ let getUsers =  (id)=>{
 //? Listener Form 
 formUser.addEventListener('submit',(e)=>{
     e.preventDefault();
-    const user = {
-        name : nameUser.value,
-        lastname : lastnameUser.value,
-        email: emailUser.value,
-        phone : phoneUser.value
+
+    if(phoneUser.value.length !== 10 ){
+        phoneUser.classList.add('error')
+        errorMessage.textContent = 'El numero de teléfono debe tener 10 dígitos. ';
+
+    }else{
+        const user = {
+            name : nameUser.value,
+            lastname : lastnameUser.value,
+            email: emailUser.value,
+            phone : phoneUser.value
+        }
+    
+        phoneUser.classList.remove('error')
+        errorMessage.textContent = '';
+        ipcRenderer.send('create-user',user);
+        formUser.reset();
+        nameUser.focus();
     }
-    ipcRenderer.send('create-user',user);
-    formUser.reset();
-    nameUser.focus();
+   
 })
 //?
 ipcRenderer.on('create-success',(e,data)=>{

@@ -7,9 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
@@ -22,9 +21,9 @@
     <div class="principal-container">
         <div class="dashboard-container">
             <ul>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="" class="dashboard-icon"><a href="./index.html" >Inicio</a></li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="" class="dashboard-icon"><a href="./users.html" style="border-bottom: solid #537FE7;">Usuarios</a></li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/3114/3114633.png" alt="" class="dashboard-icon"><a href="./products.html">Productos</a></li>
+                <li><img src="https://cdn-icons-png.flaticon.com/512/2626/2626923.png" alt="" class="dashboard-icon"><a href="./index.html" >Inicio</a></li>
+                <li><img src="https://cdn-icons-png.flaticon.com/512/9356/9356328.png" alt="" class="dashboard-icon"><a href="./users.html" style="border-bottom: solid #537FE7;">Usuarios</a></li>
+                <li><img src="https://cdn-icons-png.flaticon.com/512/679/679821.png" alt="" class="dashboard-icon"><a href="./products.html">Productos</a></li>
             </ul>
         </div>
         <div class="main-container">
@@ -32,7 +31,7 @@
             <form id="form-users">
                 <div>
                 <label>Name</label>
-                <input type="text" id="name-user" required autofocus>
+                <input type="text"  id="name-user" required autofocus>
                 <label>Lastname</label>
                 <input type="text" id="lastname-user" required>
                 </div>
@@ -41,6 +40,7 @@
                     <input type="email" id="email-user" required>
                     <label>Phone</label>
                     <input type="number" id="phone-user" min="0"   required>
+                    <span class="error-message"></span>
                 </div>
                 <button type="submit">Send</button>
               

@@ -1,3 +1,7 @@
+
+:root{
+    --title-font :'Orbitron', sans-serif;
+}
 *{
     box-sizing: border-box;
     margin: 0;
@@ -11,11 +15,11 @@ body{
     display: grid;
     grid-template-columns: auto 1fr ;
     min-width: 360px;
+    
 }
 .dashboard-container{
-    background-color: #C0EEF2;
-    height: 170vh;
-    max-width: 170vh;
+    background-color: #260B1D;
+    height: 140vh;
     padding-top: 25%;
     min-width: 230px;
     max-width: 100vh;
@@ -29,11 +33,12 @@ body{
     flex-direction: column;
     gap: 20px;
     padding-top: 5%;
+    font-family: var(--title-font);
 }
 
 .dashboard-container ul li{
     color: #181823;
-    background: linear-gradient(#f0f0f0 0 0) var(--p,0)/var(--p,0) no-repeat;
+    background: linear-gradient(#533B59 0 0) var(--p,0)/var(--p,0) no-repeat;
     font-size: 15px;
     transition: 0.4s,background-position 0s;
     border-radius: 2px;
@@ -45,7 +50,7 @@ body{
     --p: 100%;
 }
 .dashboard-container ul li a{
-    color: #181823;
+    color: white;
 }
 
 
@@ -57,24 +62,30 @@ body{
     display: flex;
     flex-direction: column;
     padding-top: 3rem;
-    background-color: #C0EEF2;
     height: 30px;
     width: 99%;
     height: 36%;
     min-height: 300px;
     margin: 0 auto;
     padding-left: 50px;
-
+    color: #000;
+    border-radius: 0 0 20px  20px ;
+    transition: 0.5s;
  }
+
  .main-container h1{
     text-align: center;
     margin-bottom: 3rem;
+    letter-spacing: 2px;
+    font-family: var(--title-font);
+    color: #533B59;
  }
 .main-container form{
     display: inherit;
     flex-direction: row;
     margin: 0 auto;
-    margin-bottom: 11rem;
+    margin-bottom: 5rem;
+
 }
 .main-container form div{
     display: flex;
@@ -86,22 +97,24 @@ body{
 .main-container form button{
     width: 90px;
     height: 38px;
-    margin-top: 25px;
+    margin-top: 50px;
     border: none;
-    background-color: #181823;
-    border: solid 2px #C0EEF2;
-    color: #C0EEF2;
+    background-color: #260B1D;
+    color: #fff;
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.5s;
+}
+.main-container form button:hover{
+    background-color: #533B59;
 }
 .main-container form div input{
     border: none;
     border-radius: 8px;
     height: 25px;
+    border: 2px solid #260B1D;
 }
-.main-container div {
-    padding-right: 20px;
-}
+
 .button-delete{
     cursor: pointer;
     margin: 0;
@@ -132,3 +145,12 @@ body{
     width: 25px;
 }
 
+/* ? STYLES ERROR FORM  */
+#phone-user.error{
+    border: 1px solid red;
+}
+.error-message{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

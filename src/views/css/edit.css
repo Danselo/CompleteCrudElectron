@@ -1,34 +1,44 @@
+:root{
+    --title-font :'Orbitron', sans-serif;
+}
 *{
     margin: 0;
     box-sizing: border-box;
 
 }
 body{
-    background-color: #C0EEF2;
+
     font-family: 'Roboto', sans-serif;
 
 }
 .main-container{
     display: flex;
     flex-direction: column;
-    padding-top: 10rem;
+    padding-top: 8rem;
     height: 30px;
     width: 99%;
     height: 36%;
     min-height: 300px;
     margin: 0 auto;
     padding-left: 50px;
-
+    color: #000;
+    border-radius: 0 0 20px  20px ;
+    transition: 0.5s;
  }
+
  .main-container h1{
     text-align: center;
     margin-bottom: 3rem;
+    letter-spacing: 2px;
+    font-family: var(--title-font);
+    color: #533B59;
  }
 .main-container form{
     display: inherit;
     flex-direction: row;
     margin: 0 auto;
-    margin-bottom: 11rem;
+    margin-bottom: 5rem;
+    
 }
 .main-container form div{
     display: flex;
@@ -40,16 +50,29 @@ body{
 .main-container form button{
     width: 90px;
     height: 38px;
-    margin-top: 25px;
+    margin-top: 50px;
     border: none;
-    background-color: #181823;
-    border: solid 2px #C0EEF2;
-    color: #C0EEF2;
+    background-color: #260B1D;
+    color: #fff;
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.5s;
+}
+.main-container form button:hover{
+    background-color: #533B59;
 }
 .main-container form div input{
     border: none;
     border-radius: 8px;
     height: 25px;
+    border: 2px solid #260B1D;
+}
+/* ? STYLES ERROR FORM  */
+#phone-user.error{
+    border: 1px solid red;
+}
+.error-message{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
 }
