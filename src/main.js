@@ -1,6 +1,8 @@
 const {app,BrowserWindow,ipcMain} = require('electron');
 const User = require('./model/User');
-const Product = require('./model/Product')
+const Product = require('./model/Product');
+const Category = require('./model/Category')
+
 
 
 let mainWindow
@@ -172,4 +174,20 @@ newWindowP.close();
     mainWindow.webContents.send('product-update-success',JSON.stringify(product));
 
     
+})
+
+
+
+
+// ? CATEGORIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSS
+
+ipcMain.on('create-category',async (e,data)=>{
+    let category = new Category(data);
+    let saveCategory = await category.save();
+    console.log(saveCategory);
+    e.reply('create-category-success', JSON.stringify(saveCategory))
+})
+ipcMain.on('get-categories',async (e,data)=>{
+    let getCategories = await Category.find();
+    e.reply('get-categories-succes',JSON.stringify(getCategories))
 })
