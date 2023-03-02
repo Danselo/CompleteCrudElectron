@@ -215,3 +215,15 @@ body{
     height: 150px;
     object-fit: cover;
 }
+
+.dashboard-icon-categories{
+    width: 25px;
+    height: 25px;
+    margin: 0 auto;
+}
+.color-status-category{
+    display: flex;
+    cursor: pointer;
+    border: none;
+    margin: 0 auto;
+}

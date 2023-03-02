@@ -189,5 +189,28 @@ ipcMain.on('create-category',async (e,data)=>{
 })
 ipcMain.on('get-categories',async (e,data)=>{
     let getCategories = await Category.find();
-    e.reply('get-categories-succes',JSON.stringify(getCategories))
+    e.reply('get-categories-success',JSON.stringify(getCategories))
+})
+
+ipcMain.on('delete-category',async(e,data)=>{
+    let category = await Category.findByIdAndDelete(data);
+    e.reply('delete-category-success',JSON.stringify(category))
+
+})
+
+ipcMain.on('change-status',async(e,data)=>{
+    let newStatus
+    if (data.status == true) {
+        newStatus = false;
+      } else {
+        newStatus = true;
+      }
+    console.log(newStatus);
+    let categories = await Category.findByIdAndUpdate(data.id,{
+        status: newStatus
+    },{new:true});
+    
+    e.reply('change-status-success',JSON.stringify(categories))
+
+
 })
