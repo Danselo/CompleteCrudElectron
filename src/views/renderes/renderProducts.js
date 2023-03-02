@@ -6,6 +6,10 @@ const priceProduct = document.querySelector('#price_product');
 const photo = document.querySelector('#photo_product');
 const description = document.querySelector('#description_product');
 const ListProduct = document.querySelector('#product_list');
+const optionsProducts = document.querySelector('.click-open-options');
+const arrowProductsOptions = document.querySelector('#arrow-option');
+const subList = document.querySelector('.sublistProduct1');
+const subList2 = document.querySelector('.sublistProduct2');
 
 let arrayProduct = [];
 
@@ -86,6 +90,19 @@ form_product.addEventListener('submit', (e) => {
     ipcRenderer.send('create-product', product);
     form_product.reset();
     nameProduct.focus();
+
+})
+
+// escuchar boton de el sidebar para mostrar opciones de usuario
+
+optionsProducts.addEventListener('click',(e)=>{
+    subList.classList.toggle('inactive');
+    subList2.classList.toggle('inactive');
+     if(subList.classList.contains('inactive')) {
+        arrowProductsOptions.setAttribute("src", 'https://www.iconsdb.com/icons/preview/white/arrow-29-xxl.png');
+    } else {
+        arrowProductsOptions.setAttribute("src", 'https://www.iconsdb.com/icons/preview/white/arrow-208-xxl.png');
+    }
 
 })
 

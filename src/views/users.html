@@ -24,7 +24,12 @@
             <ul>
                 <li><img src="https://cdn-icons-png.flaticon.com/512/2626/2626923.png" alt="" class="dashboard-icon"><a href="./index.html" >Inicio</a></li>
                 <li><img src="https://cdn-icons-png.flaticon.com/512/9356/9356328.png" alt="" class="dashboard-icon"><a href="./users.html" style="border-bottom: solid #537FE7;">Usuarios</a></li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/679/679821.png" alt="" class="dashboard-icon"><a href="./products.html">Productos</a></li>
+                <li class="click-open-options"><img src="https://cdn-icons-png.flaticon.com/512/3712/3712193.png" alt="" class="dashboard-icon">Gestion de productos <img src="https://www.iconsdb.com/icons/preview/white/arrow-29-xxl.png" alt="arrow" class="dashboard-icon" id="arrow-option">
+                    <li class="inactive sublistProduct1"><img src="https://cdn-icons-png.flaticon.com/512/679/679821.png" alt="" class="dashboard-icon"><a href="./products.html">Productos</a></li>
+                    <li class="inactive sublistProduct2"><img src="https://cdn-icons-png.flaticon.com/512/9789/9789304.png" class="dashboard-icon" alt=""> Categorias</li>
+
+            </li>
+
             </ul>
         </div>
         <div class="main-container">
@@ -87,6 +92,8 @@
       
 	$(document).ready(function() {
 	    var table = $('#example').DataTable( {
+            responsive: true,
+            pageLength: 5, 
 	        lengthChange: false,
 	        buttons: [ 'excel', 'pdf', 'colvis' ],
           "scrollX": true,

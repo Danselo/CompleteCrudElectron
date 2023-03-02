@@ -15,14 +15,14 @@ body{
     display: grid;
     grid-template-columns: auto 1fr ;
     min-width: 360px;
-    
+    height: 100vh;
+    width: 98%;
 }
 .dashboard-container{
+    height: 180vh;
     background-color: #260B1D;
-    height: 140vh;
     padding-top: 25%;
-    min-width: 230px;
-    max-width: 100vh;
+    min-width: 210px;
     display: flex;
     flex-direction: column;
 }
@@ -32,6 +32,7 @@ body{
     margin: 0 auto;
     border-radius: 50px;
     margin-bottom: 50px;
+    object-fit: cover;
 }
 .dashboard-icon{
     width: 18px;
@@ -58,8 +59,20 @@ body{
 .dashboard-container ul li:hover{
     --p: 100%;
 }
-.dashboard-container ul li a{
+.dashboard-container ul li a,
+.dashboard-container ul li{
     color: white;
+    cursor: pointer;
+}
+.sublistProduct1,
+.sublistProduct2 {
+    margin-left: 25px;
+    background: linear-gradient(#836d0e 0 0) var(--p,0)/var(--p,0) no-repeat !important;
+
+}
+
+.inactive{
+    display: none;
 }
 
 
@@ -80,8 +93,16 @@ body{
     color: #000;
     border-radius: 0 0 20px  20px ;
     transition: 0.5s;
- }
 
+ }
+.main-container > img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 50%;
+    margin-bottom: 50px;
+}
  .main-container h1{
     text-align: center;
     margin-bottom: 3rem;
@@ -118,10 +139,14 @@ body{
     background-color: #533B59;
 }
 .main-container form div input{
-    border: none;
     border-radius: 8px;
     height: 25px;
     border: 2px solid #260B1D;
+}
+.main-container form div textarea{
+    border: 2px solid #260B1D;
+    border-radius: 8px;
+
 }
 
 .button-delete{
@@ -171,5 +196,5 @@ body{
 .image-pro{
     width: 150px;
     height: 150px;
-    object-fit: contain;
+    object-fit: cover;
 }
