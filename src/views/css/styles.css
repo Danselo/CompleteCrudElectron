@@ -23,6 +23,15 @@ body{
     padding-top: 25%;
     min-width: 230px;
     max-width: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.dashboard-container >img{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50px;
+    margin-bottom: 50px;
 }
 .dashboard-icon{
     width: 18px;
