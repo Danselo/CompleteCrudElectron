@@ -40,6 +40,7 @@ function deleteProduct(id, name) {
     }).then((result) => {
         if (result.isConfirmed) {
             ipcRenderer.send('delete-product', id);
+
             Swal.fire(
                 'Eliminado!',
                 'El producto ha sido eliminado',

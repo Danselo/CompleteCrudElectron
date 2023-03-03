@@ -15,13 +15,13 @@ let changeStatus = (id,status) =>{
         status: status
     }
     Swal.fire({
-        title: '¿Estas seguro que quieres cambiar  el  estado de la categoria a  ' + !status ,
+        title: '¿Estas seguro que quieres cambiar  el  estado de la categoria a:   ' + !status ,
         text: "No puedes revertir esta acción",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#ff405c',
         cancelButtonColor: 'rgb(2, 101, 207)',
-        confirmButtonText: 'Si, Eliminar'
+        confirmButtonText: 'Cambiar estado'
     }).then((result) => {
         if (result.isConfirmed) {
             ipcRenderer.send('change-status',objectCategory);
@@ -131,7 +131,7 @@ ipcRenderer.on('change-status-success',(e,data)=>{
     Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Se ha creado cambiado el estado correctamente!!',
+        title: 'Se ha  cambiado el estado correctamente!!',
         showConfirmButton: false,
         timer: 2000
       })

@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain} = require('electron');
+const {app,BrowserWindow,ipcMain, ipcRenderer} = require('electron');
 const User = require('./model/User');
 const Product = require('./model/Product');
 const Category = require('./model/Category')
@@ -18,8 +18,10 @@ function createWindow(){
                 contextIsolation: false
             }
         })
+       
         mainWindow.loadFile('src/views/index.html')
-
+        mainWindow.setIcon(app.getAppPath() + '/src/imgs/DAFLOGO.png')
+        console.log(app.getAppPath());
         
     })
 

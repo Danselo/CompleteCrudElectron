@@ -102,7 +102,15 @@ optionsProducts.addEventListener('click',(e)=>{
 })
 //?
 ipcRenderer.on('create-success',(e,data)=>{
+    
     const user = JSON.parse(data);
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `Se ha creado  el usuario ${user.name}  correctamente!!`,
+        showConfirmButton: false,
+        timer: 2000
+      })
     const usersUpdated = arrayUsers.push(user)
     getUsers(usersUpdated)
 

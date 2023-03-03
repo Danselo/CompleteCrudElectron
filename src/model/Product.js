@@ -16,7 +16,11 @@ const ProductSchema= new Schema({
     photo: {
         type: String,
         required: true
-    }
+    },
+    // category_id:{
+    //     type: String,
+    //     required: true
+    // }
 })
 
 module.exports = model('Product',ProductSchema);

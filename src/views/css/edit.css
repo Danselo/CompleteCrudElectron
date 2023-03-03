@@ -67,6 +67,11 @@ body{
     height: 25px;
     border: 2px solid #260B1D;
 }
+.main-container form div textarea{
+    border: 2px solid #260B1D;
+    border-radius: 8px;
+
+}
 /* ? STYLES ERROR FORM  */
 #phone-user.error{
     border: 1px solid red;
