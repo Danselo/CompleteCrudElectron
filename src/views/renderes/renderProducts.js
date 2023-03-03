@@ -25,14 +25,14 @@ function loadCategoriesInForm(array){
         `
     })
 }
-function updateProduct(id, name, price, description, photo){
+function updateProduct(id, name, price, description, photo,category_id){
 let product= {
     id: id,
     name: name,
     price: price,
     description: description,
-    photo: photo
-
+    photo: photo,
+    category_id: category_id
 
 }
 ipcRenderer.send('update-product', product);
@@ -64,7 +64,7 @@ function deleteProduct(id, name) {
 function loadProduct(data) {
     ListProduct.innerHTML = '';
     data.map(product => {
-        console.log(product);
+        // console.log(product.category_id);
         ListProduct.innerHTML += `
         <tr>
         <td>${product.name}</td>
@@ -74,7 +74,7 @@ function loadProduct(data) {
         <td><img src='${product.photo}' class="image-pro"></td>
         <td>
         <button class="button-delete" onclick="deleteProduct('${product._id}', '${product.name}')"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178384.png" alt="delete-buttom" class="delete-buttom" ></button>
-        <button class="button-edit" onclick="updateProduct('${product._id}', '${product.name}','${product.price}','${product.description}', '${product.photo}')"><img src="https://cdn-icons-png.flaticon.com/512/1160/1160515.png" alt="delete-buttom" class="edit-buttom" ></button>
+        <button class="button-edit" onclick="updateProduct('${product._id}', '${product.name}','${product.price}','${product.description}', '${product.photo}','${product.category_id._id}')"><img src="https://cdn-icons-png.flaticon.com/512/1160/1160515.png" alt="delete-buttom" class="edit-buttom" ></button>
         </td>
 
        
@@ -166,10 +166,12 @@ ipcRenderer.on('product-update-success', (e, data)=>{
         timer: 2000
       })
     const producto =JSON.parse(data);
+    console.log(producto);
     arrayProduct = arrayProduct.map(product=>{
         if(product._id === producto._id) {
             product.name = producto.name;
             product.price = producto.price;
+            product.category_id = producto.category_id,
             product.description = producto.description;
             product.photo = producto.photo;
 

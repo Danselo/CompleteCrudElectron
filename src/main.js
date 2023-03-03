@@ -1,7 +1,8 @@
 const {app,BrowserWindow,ipcMain} = require('electron');
 const User = require('./model/User');
 const Product = require('./model/Product');
-const Category = require('./model/Category')
+const Category = require('./model/Category');
+const { populate } = require('./model/User');
 
 
 
@@ -177,15 +178,19 @@ ipcMain.on('update-product',(e,data)=>{
 
 ipcMain.on('update-new-product', async(e, data)=>{
 newWindowP.close();
+
     const product = await Product.findByIdAndUpdate(data.id, {
         name: data.product.name,
         price: data.product.price,
         photo: data.product.photo,
-    description: data.product.description
+     description: data.product.description,
+     category_id : data.product.category_id
 
     },{new: true});
+    const populatedProduct = await Product.findById(product._id).populate('category_id', 'name');
 
-    mainWindow.webContents.send('product-update-success',JSON.stringify(product));
+
+    mainWindow.webContents.send('product-update-success',JSON.stringify(populatedProduct));
 
     
 })
@@ -231,4 +236,10 @@ ipcMain.on('get-categories-product',async(e,data)=>{
     let categories = await Category.find();
     
     e.reply('get-categories-product-success',JSON.stringify(categories))
+})
+
+ipcMain.on('get-categories-edit',async(e,data)=>{
+    let categories = await Category.find();
+    
+    e.reply('get-categories-product-success-edit',JSON.stringify(categories))
 })
