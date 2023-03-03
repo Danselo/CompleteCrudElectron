@@ -10,10 +10,21 @@ const optionsProducts = document.querySelector('.click-open-options');
 const arrowProductsOptions = document.querySelector('#arrow-option');
 const subList = document.querySelector('.sublistProduct1');
 const subList2 = document.querySelector('.sublistProduct2');
-
+const categoriesList = document.querySelector('#categoriesList');
 let arrayProduct = [];
+let arrayCategories = [];
 
 
+
+
+function loadCategoriesInForm(array){
+    console.log(array);
+    array.map(c => {
+        categoriesList.innerHTML += `
+        <option value="${c._id}" >${c.name}</option>
+        `
+    })
+}
 function updateProduct(id, name, price, description, photo){
 let product= {
     id: id,
@@ -53,11 +64,13 @@ function deleteProduct(id, name) {
 function loadProduct(data) {
     ListProduct.innerHTML = '';
     data.map(product => {
+        console.log(product);
         ListProduct.innerHTML += `
         <tr>
         <td>${product.name}</td>
         <td>${product.price}</td>
         <td>${product.description}</td>
+        <td>${product.category_id.name}</td>
         <td><img src='${product.photo}' class="image-pro"></td>
         <td>
         <button class="button-delete" onclick="deleteProduct('${product._id}', '${product.name}')"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178384.png" alt="delete-buttom" class="delete-buttom" ></button>
@@ -81,7 +94,8 @@ form_product.addEventListener('submit', (e) => {
         name: nameProduct.value,
         price: priceProduct.value,
         photo: photo.value,
-        description: description.value
+        description: description.value,
+        category_id : categoriesList.value
     }
 
 
@@ -117,6 +131,7 @@ ipcRenderer.on('create-product-success', (e, data) => {
     const product = JSON.parse(data);
     arrayProduct.push(product);
     loadProduct(arrayProduct);
+    // console.log(product);
 
 })
 
@@ -168,6 +183,21 @@ ipcRenderer.on('product-update-success', (e, data)=>{
 })
 
 
+
+ipcRenderer.send('get-categories-product')
+ipcRenderer.on('get-categories-product-success',(e,data)=>{
+    let categories = JSON.parse(data);
+    let arrayTrue = [];
+    console.log(categories);
+    categories.map(categories => {
+        if(categories.status === true){
+            arrayTrue.push(categories);
+        }
+    })
+
+    arrayCategories = arrayTrue;
+    loadCategoriesInForm(arrayCategories);
+});
 
 
 

@@ -136,16 +136,28 @@ ipcMain.on('user-update',async(e,data)=>{
 
 //******** Productoss *********
 ipcMain.on('create-product', async(e, data)=>{
-    const product = new Product(data);
-    const productDate = await product.save();
- //Envio la confirmacion desde el back
-    e.reply('create-product-success',JSON.stringify(productDate));
+    try{
+        const product = new Product(data);
+        const productDate = await product.save();
+     //Envio la confirmacion desde el back
+
+
+        //?  Carga los datos de la categoría relacionada utilizando populate
+        const populatedProduct = await Product.findById(productDate._id).populate('category_id', 'name');
+
+        e.reply('create-product-success',JSON.stringify(populatedProduct));
+    }catch(e){
+        lo
+    }
+    
 
 })
 
 ipcMain.on('get-products', async(e)=>{
 const product = await Product.find();  //find agregate with other model 
-e.reply('get-product-success', JSON.stringify(product))
+const populatedProduct = await Product.find().populate('category_id', 'name');
+// console.log(populatedProduct);
+e.reply('get-product-success', JSON.stringify(populatedProduct))
 })
 
 
@@ -214,5 +226,9 @@ ipcMain.on('change-status',async(e,data)=>{
     
     e.reply('change-status-success',JSON.stringify(categories))
 
-
+})
+ipcMain.on('get-categories-product',async(e,data)=>{
+    let categories = await Category.find();
+    
+    e.reply('get-categories-product-success',JSON.stringify(categories))
 })

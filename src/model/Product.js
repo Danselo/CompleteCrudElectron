@@ -17,10 +17,11 @@ const ProductSchema= new Schema({
         type: String,
         required: true
     },
-    // category_id:{
-    //     type: String,
-    //     required: true
-    // }
+    category_id:{
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
+    }
 })
 
 module.exports = model('Product',ProductSchema);
