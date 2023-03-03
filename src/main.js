@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain, ipcRenderer} = require('electron');
+const {app,BrowserWindow,ipcMain} = require('electron');
 const User = require('./model/User');
 const Product = require('./model/Product');
 const Category = require('./model/Category')
@@ -144,7 +144,7 @@ ipcMain.on('create-product', async(e, data)=>{
 })
 
 ipcMain.on('get-products', async(e)=>{
-const product = await Product.find();
+const product = await Product.find();  //find agregate with other model 
 e.reply('get-product-success', JSON.stringify(product))
 })
 
